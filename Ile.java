@@ -126,13 +126,6 @@ public class Ile {
     }
 
     boolean is_winnable() {
-        /*
-         * Case[][] grid;
-         * Coord heliport;
-         * HashMap<Coord, Element> artifacts;
-         * HashMap<Integer, Player> players;
-         */
-
         // if all players are dead
         if (players.isEmpty())
             return false;
