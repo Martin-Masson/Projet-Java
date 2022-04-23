@@ -21,6 +21,48 @@ public class Case {
     this.water_level = 0; // 0 = dry ; 1 = flooded ; 2 = submerged
   }
 
+  boolean is_normal() {
+    return this.water_level == 0;
+  }
+
+  boolean is_flooded() {
+    return this.water_level == 1;
+  }
+
+  boolean is_submerged() {
+    return this.water_level == 2;
+  }
+
+  boolean is_in_bound() {
+    boolean output = false;
+    int i = this.x();
+    int j = this.y();
+    if (i == 2 || i == 3) {
+      output = true;
+    } else if ((i == 1 || i == 4) && 1 <= j && j <= 4) {
+      output = true;
+    } else if ((i == 0 || i == 5) && 2 <= j && j <= 3) {
+      output = true;
+    }
+    return output;
+  }
+
+  boolean is_adjacent(Case other) {
+    if (this.coord().equal(other.coord()))
+      return true;
+    int dx = Math.abs(this.x() - other.x());
+    int dy = Math.abs(this.y() - other.y());
+    return (dx + dy == 1);
+  }
+
+  boolean is_adjacent(Coord c) {
+    if (this.coord().equal(c))
+      return true;
+    int dx = Math.abs(this.x() - c.x());
+    int dy = Math.abs(this.y() - c.y());
+    return (dx + dy == 1);
+  }
+
   Coord coord() {
     return this.coord;
   }
@@ -47,38 +89,6 @@ public class Case {
 
   void set_water_level(int water_level) {
     this.water_level = water_level;
-  }
-
-  boolean is_adjacent(Case other) {
-    int dx = Math.abs(this.x() - other.x());
-    int dy = Math.abs(this.y() - other.y());
-    return (dx + dy == 1);
-  }
-
-  boolean is_normal() {
-    return this.water_level == 0;
-  }
-
-  boolean is_flooded() {
-    return this.water_level == 1;
-  }
-
-  boolean is_submerged() {
-    return this.water_level == 2;
-  }
-
-  boolean is_in_bound() {
-    boolean output = false;
-    int i = this.x();
-    int j = this.y();
-    if (i == 2 || i == 3) {
-      output = true;
-    } else if ((i == 1 || i == 4) && 1 <= j && j <= 4) {
-      output = true;
-    } else if ((i == 0 || i == 5) && 2 <= j && j <= 3) {
-      output = true;
-    }
-    return output;
   }
 
   void dry_out() {
